@@ -57,6 +57,9 @@ class FruitLabelPipeline:
         """Setup logging configuration."""
         log_level = getattr(logging, self.config.get('log_level', 'INFO').upper())
         
+        # The log file lives in the output directory, so create it first
+        os.makedirs(self.config['output_dir'], exist_ok=True)
+        
         logging.basicConfig(
             level=log_level,
             format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
